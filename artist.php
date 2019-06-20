@@ -3,8 +3,7 @@
     
     if(isset($_GET['id'])) {
         $artistId = $_GET['id'];
-    }
-    else {
+    } else {
         header("Location: index.php");
     }
 
