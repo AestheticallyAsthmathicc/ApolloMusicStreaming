@@ -21,6 +21,11 @@ $(window).scroll(function() {
     hideOptionsMenu();
 });
 
+$(document).on("change", "select.playlist", function() {
+    var playlistId = $(this).val;
+    //TODO: wmake this shit working (154)
+});
+
 function openPage(url) {
 
     if(timer != null) {

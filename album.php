@@ -55,6 +55,7 @@ $artistId = $artist->getId();
                             </div>
 
                             <div class='trackOptions'>
+                                <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
                                 <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
                             </div>
 
@@ -63,6 +64,7 @@ $artistId = $artist->getId();
                             </div>
                         </li>
                     </div>";
+                    //we added a hidden input to know which song is going to be put into a playlist
                 $i++;
             }
         ?>
@@ -78,8 +80,7 @@ $artistId = $artist->getId();
 
 <nav class="optionsMenu">
     <input type="hidden" class="songId">
-
-    <div class="item">Add to playlist</div>
+    <?PHP echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
     <div class="item">Option 2</div>
     <div class="item">Option 3</div>
 </nav>
