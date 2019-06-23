@@ -39,11 +39,11 @@
     <h2>Songs</h2>
     <ul class="tracklist">
         <?PHP
-            $songsQuery = mysqli_query($con, "SELECT id FROM songs WHERE title LIKE '$term%' LIMIT 10");
+            $songsQuery = mysqli_query($con, "SELECT id FROM songs WHERE lower(title) LIKE lower('$term%') LIMIT 10");
             //% means anything beofre or after that like it'll search for not just the word but also see the words before or after
 
             if(mysqli_num_rows($songsQuery) == 0) {
-                echo "<span class='noResults'> No songs found matching " . $term . "</span>";
+                echo "<span class='noResults showError'> No songs found matching " . $term . "</span>";
             }
 
             $songsIdArray = array();
@@ -101,10 +101,10 @@
 
     <?PHP
 
-        $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
+        $artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE lower(name) LIKE lower('$term%') LIMIT 10");
 
         if(mysqli_num_rows($artistsQuery) == 0) {
-            echo "<span class='noResults'> No artists found matching " . $term . "</span>";
+            echo "<span class='noResults showError'> No artists found matching " . $term . "</span>";
         }
 
         while($row = mysqli_fetch_array($artistsQuery)) {
@@ -129,10 +129,10 @@
 <div class="gridViewContainer tracklistContainer">
     <h2>Albums</h2>
 	<?PHP
-		$albumQuery = mysqli_query($con, "SELECT * FROM albums where title LIKE '$term' LIMIT 10");
+		$albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE lower(title) LIKE lower('$term%') LIMIT 10");
 
         if(mysqli_num_rows($albumQuery) == 0) {
-            echo "<span class='noResults'> No albums found matching " . $term . "</span>";
+            echo "<span class='noResults showError'> No albums found matching " . $term . "</span>";
         }
 
 		while($row = mysqli_fetch_array($albumQuery)) {

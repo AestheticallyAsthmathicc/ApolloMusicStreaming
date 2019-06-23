@@ -280,6 +280,13 @@ body {
         img {
             width: 100%;
         }
+
+        .playlistImage {
+            border: 3px solid #282828;
+            border-radius: 18px;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
     }
 
     .rightSection {
@@ -455,6 +462,8 @@ body {
     }
 
     .artistName {
+        font-weight: bold;
+        font-size: 32px;
         color: #fff;
     }
 }
@@ -466,4 +475,55 @@ body {
 
 input:focus {
     outline: none;
+}
+
+.showError {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.playlistsContainer {
+    padding: 10px 0;
+
+    .buttonItems {
+        .button {
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+    }
+
+    .gridViewItem {
+        .playlistImage {
+            border: 3px solid #282828;
+            border-radius: 18px;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.optionsMenu {
+    position: fixed;
+    background-color: #282828;
+    width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    z-index: 1000;
+    display: none;
+
+    .item {
+        width: 100%;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        font-weight: 400;
+        color: rgba(147, 147, 147, 0.8);
+        cursor: pointer;
+        height: 40px;
+
+        &:hover {
+            color: #fff;
+            background-color: #333;
+            border-color: #333;
+        }
+    }
 }

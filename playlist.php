@@ -1,43 +1,40 @@
 <?PHP include("includes/includedFiles.php"); 
 
 if(isset($_GET['id'])) {
-    $albumId = $_GET['id'];
+    $playlistId = $_GET['id'];
 }
 else {
     header("Location: index.php");
 }
 
-$album = new Album($con, $albumId);
+$playlist = new Playlist($con, $playlistId);
 
-$artist = $album->getArtist();
-$artist = $album->getArtist();
-$artistId = $artist->getId();
+$owner = new User($con, $playlist->getOwner());
 
 ?>
 
-<script>
-    $(".rightSection .artistName").attr("onclick", "openPage('artist.php?id= " + "<?php echo $artistId ?>" + "')");
-</script>
-
 <div class="entityInfo borderBottom">
     <div class="leftSection">
-        <img src="<?PHP echo $album->getArtworkPath(); ?>" alt="">
+        <div class="playlistImage">
+            <img src="assets/images/icons/playlist.png" alt="">
+        </div>
     </div>
     <div class="rightSection">
-        <h2><?PHP echo $album->getTitle(); ?></h2>
-        <p role="link" tabindex="0" class="artistName">By <?PHP echo $artist->getName(); ?></p>
-        <p><?PHP echo $album->getNumberOfSongs(); ?> songs</p>
+        <h2><?PHP echo $playlist->getName(); ?></h2>
+        <p>By <?PHP echo $playlist->getOwner(); ?></p>
+        <p><?PHP echo $playlist->getNumberOfSongs(); ?> songs</p>
+        <button class="button" onclick="deletePlaylist('<?PHP echo $playlistId; ?>')">Delete Playlist</button>
     </div>
 </div>
 
 <div class="tracklistContainer">
     <ul class="tracklist">
         <?PHP
-            $songsIdArray = $album->getSongIds();
+            $songsIdArray = $playlist->getSongIds();
             $i = 1;
             foreach($songsIdArray as $songId) {
-                $albumSong = new Song($con, $songId);
-                $albumArtist = $albumSong->getArtist();
+                $playlistSong = new Song($con, $songId);
+                $songArtist = $playlistSong->getArtist();
 
                 //we used the weird ass quotes with black slashes to turn the value into string other wise it would have been an int and 
                 //the function we wrote doesnt take in ints, ya bitch!
@@ -45,21 +42,21 @@ $artistId = $artist->getId();
                 echo "<div class='tracklistContainer'>
                         <li class='tracklistRow'>
                             <div class='trackCount'>
-                            <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
+                            <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $playlistSong->getId() . "\", tempPlaylist, true)'>
                                 <span class='trackNumber'>$i</span>
                             </div>
                             
                             <div class='trackInfo'>
-                                <span class='trackName'>" . $albumSong->getTitle() . "</span>
-                                <span class='artistName'>" . $albumArtist->getName() . "</span>
+                                <span class='trackName'>" . $playlistSong->getTitle() . "</span>
+                                <span class='artistName'>" . $songArtist->getName() . "</span>
                             </div>
 
                             <div class='trackOptions'>
-                                <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
+                                <img class='optionsButton' src='assets/images/icons/more.png'>
                             </div>
 
                             <div class='trackDuration'>
-                                <span class='duration'>" . $albumSong->getDuration() . "</span>
+                                <span class='duration'>" . $playlistSong->getDuration() . "</span>
                             </div>
                         </li>
                     </div>";
@@ -75,11 +72,3 @@ $artistId = $artist->getId();
         </script>
     </ul>
 </div>
-
-<nav class="optionsMenu">
-    <input type="hidden" class="songId">
-
-    <div class="item">Add to playlist</div>
-    <div class="item">Option 2</div>
-    <div class="item">Option 3</div>
-</nav>

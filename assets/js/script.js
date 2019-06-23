@@ -9,6 +9,18 @@ var shuffle = false;
 var userLoggedIn;
 var timer;
 
+$(document).click(function(click) {
+    var target = $(click.target);
+
+    if(!target.hasClass("item") && !target.hasClass("optionsButton")) {
+        hideOptionsMenu();
+    };
+});
+
+$(window).scroll(function() {
+    hideOptionsMenu();
+});
+
 function openPage(url) {
 
     if(timer != null) {
@@ -98,4 +110,61 @@ function Audio() {
 
 function playFirstSong() {
     setTrack(tempPlaylist[0], tempPlaylist, true);
+}
+
+function createPlaylist() {
+    var popup = prompt("Please enter the name of your playlist:");
+    if(popup != null) {
+        $.post("includes/handlers/ajax/createPlaylist.php", {name: popup, username: userLoggedIn}).done(function(error) {
+            //do something when ajax returns
+            if(error != "") {
+                alert(error);
+                return;
+            }
+            openPage("yourMusic.php");
+        });
+    }
+} 
+
+function deletePlaylist(playlistId) {
+    var prompt = confirm("Are you sure you want to delete this playlist?");
+
+    if(prompt) {
+        $.post("includes/handlers/ajax/deletePlaylist.php", {playlistId: playlistId}).done(function(error) {
+            //do something when ajax returns
+            if(error != "") {
+                alert(error);
+                return;
+            }
+            openPage("yourMusic.php");
+        });
+    }
+}
+
+function hideOptionsMenu() {
+    var menu = $(".optionsMenu");
+    if(menu.css("display") != "none") {
+        menu.css("display", "none");
+    }
+}
+
+function showOptionsMenu(button) {
+    var menu = $(".optionsMenu");
+
+    var menuWidth = menu.width();
+
+    var scrollTop = $(window).scrollTop(); 
+    //distance from top of window to the top of document
+    var elementOffset = $(button).offset().top;
+    //distance from top of the document
+
+    var top = elementOffset - scrollTop;
+    var left = $(button).position().left;
+
+
+    menu.css({
+        "top": top + "px",
+        "left": left - menuWidth +"px",
+        "display": "inline"
+    });
 }
