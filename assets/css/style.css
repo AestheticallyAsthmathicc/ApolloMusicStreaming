@@ -318,6 +318,15 @@ body {
   font-weight: 200;
 }
 
+.entityInfo .userInfo h1 {
+  text-align: center;
+}
+
+.entityInfo .buttonItems .button {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
 .tracklistContainer {
   padding: 8px;
   border-radius: 8px;
@@ -512,6 +521,8 @@ input:focus {
   background-color: #282828;
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 2px 2px 25px black;
+          box-shadow: 2px 2px 25px black;
   border-radius: 3px;
   z-index: 1000;
   display: none;
@@ -524,10 +535,10 @@ input:focus {
           box-sizing: border-box;
   font-weight: 400;
   color: rgba(147, 147, 147, 0.8);
-  cursor: pointer;
   height: 40px;
   background-color: #282828;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .optionsMenu .item:hover {

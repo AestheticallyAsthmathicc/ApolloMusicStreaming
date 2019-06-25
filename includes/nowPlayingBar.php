@@ -161,7 +161,6 @@
             $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
                 var artist = JSON.parse(data);
                 $(".trackInfo .artistName span").text(artist.name);
-                $(".trackInfo .artistName span").attr("onclick", "openPage('artist.php?id= " + artist.id + "')");
             });
 
             $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {

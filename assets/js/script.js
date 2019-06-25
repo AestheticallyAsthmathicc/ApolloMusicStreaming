@@ -22,9 +22,36 @@ $(window).scroll(function() {
 });
 
 $(document).on("change", "select.playlist", function() {
-    var playlistId = $(this).val;
-    //TODO: wmake this shit working (154)
+    var select = $(this);
+    //this will contain the value of the playlsit
+    var playlistId = select.val();
+    //this will contain the value of the song
+    var songId = select.prev(".songId").val();
+
+    $.post("includes/handlers/ajax/addToPlaylist.php", { playlistId: playlistId, songId: songId}).done(function(error) {
+        
+        if(error != "") {
+            alert(error);
+            return;
+        }
+
+        hideOptionsMenu();
+        select.val("");
+    });
 });
+
+function removeFromPlaylist(button, playlistId) {
+    var songId = $(button).prevAll(".songId").val();
+
+    $.post("includes/handlers/ajax/removeFromPlaylist.php", {playlistId: playlistId, songId: songId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        openPage("playlist.php?id=" + playlistId);
+    });
+}
 
 function openPage(url) {
 
@@ -154,9 +181,14 @@ function hideOptionsMenu() {
 }
 
 function showOptionsMenu(button) {
+
+    var songId = $(button).prev(".songId").val();
+
     var menu = $(".optionsMenu");
 
     var menuWidth = menu.width();
+
+    menu.find(".songId").val(songId);
 
     var scrollTop = $(window).scrollTop(); 
     //distance from top of window to the top of document
@@ -171,5 +203,11 @@ function showOptionsMenu(button) {
         "top": top + "px",
         "left": left - menuWidth +"px",
         "display": "inline"
+    });
+}
+
+function logout() {
+    $.post("includes/handlers/ajax/logout.php", function() {
+        location.reload();
     });
 }
