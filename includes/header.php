@@ -12,7 +12,11 @@
 	if(isset($_SESSION['userLoggedIn'])) {
 		$userLoggedIn = new User($con, $_SESSION['userLoggedIn']);
 		$username = $userLoggedIn->getUsername();
-		echo "<script>userLoggedIn = '$username';</script>";
+		$adminCheck = $userLoggedIn->adminCheck();
+		echo "<script>
+			userLoggedIn = '$username';
+			adminCheck = '$adminCheck';
+		</script>";
 	}
 	else {
 		header("Location: register.php");

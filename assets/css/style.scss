@@ -202,6 +202,10 @@ body {
     position: relative;
 }
 
+.admin {
+    display: none;
+}
+
 .navItemLink {
     color: #a0a0a0;
     text-decoration: none;
@@ -263,8 +267,18 @@ body {
             overflow: hidden;
             white-space: nowrap;
         }
-
     }
+
+    .adminView {
+        margin: 0 auto 0 auto;
+        display: block;
+        text-align: center;
+        background-color: #000;
+        border-radius: 25px;
+        padding-bottom: 15px;
+        box-shadow: 0 0 25px #181818;
+    }
+
 }
 
 .entityInfo {
@@ -438,6 +452,11 @@ body {
     margin-bottom: 20px;
 }
 
+.borderTop {
+    border-top: 1px solid #a0a0a0;
+    margin-top: 20px;
+}
+
 [role="link"] {
     cursor: pointer;
 }
@@ -548,5 +567,38 @@ input:focus {
         border: none;
         -webkit-appearance: none;
         -moz-appearance: none;
+    }
+}
+
+.userDetails {
+    padding: 20px;
+    
+    .container {
+        h2 {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        .button {
+            display: block;
+            margin: 16px auto;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            height: 50px;
+            width: 100%;
+            background: #1f1f1f;
+            border: none;
+            font-size: 18px;
+            font-weight: 300;
+            padding: 0 20px;
+        }
+        
+        span {
+            color: #2ebd59;
+            font-weight: 300;
+        }
     }
 }

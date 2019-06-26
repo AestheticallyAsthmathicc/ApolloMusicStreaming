@@ -23,6 +23,24 @@
             <div class="navItem">
                 <span role="link" tabindex="0" onclick="openPage('settings.php')" class="navItemLink"><?PHP echo $userLoggedIn->getFirstAndLastName(); ?></span>
             </div>
+            <div class="navItem admin borderTop">
+                <span role="link" tabindex="0" onclick="openPage('adminDashboard.php')" class="navItemLink">Dashboard</span>
+            </div>
+            <div class="navItem admin">
+                <span role="link" tabindex="0" onclick="openPage('adminArtists.php')" class="navItemLink">Artists</span>
+            </div>
+            <div class="navItem admin">
+                <span role="link" tabindex="0" onclick="openPage('adminAlbums.php')" class="navItemLink">Albums</span>
+            </div>
+            <div class="navItem admin">
+                <span role="link" tabindex="0" onclick="openPage('adminSongs.php')" class="navItemLink">Songs</span>
+            </div>
         </div>
     </nav>
 </div>
+
+<script>
+    if(adminCheck == 1) {
+        $(".admin").css("display", "block");
+    }
+</script>
