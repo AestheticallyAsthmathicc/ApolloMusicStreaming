@@ -17,7 +17,7 @@
         $rowPlaylists = mysqli_num_rows($queryPlaylists);
         echo "
             <div class='gridViewItem adminView'>
-                <div class='gridViewInfo'><h2>Users</h2>" . $rowUsers . "</div>
+                <div class='gridViewInfo'><h2  onclick='openPage(\"adminUsers.php\")' role='link' tabindex='0'>Users</h2>" . $rowUsers . "</div>
                 <div class='gridViewInfo'><h2>Songs</h2>" . $rowSongs . "</div>
                 <div class='gridViewInfo'><h2>Albums</h2>" . $rowAlbums . "</div>
                 <div class='gridViewInfo'><h2>Playlists</h2>" . $rowPlaylists . "</div>

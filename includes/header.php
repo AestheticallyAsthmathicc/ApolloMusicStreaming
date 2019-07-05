@@ -17,8 +17,7 @@
 			userLoggedIn = '$username';
 			adminCheck = '$adminCheck';
 		</script>";
-	}
-	else {
+	} else {
 		header("Location: register.php");
 	}
 

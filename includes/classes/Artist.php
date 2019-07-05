@@ -28,5 +28,11 @@
             }
             return $array;
         }
+
+        public function getArtistPic() {
+            $picQuery = mysqli_query($this->con, "SELECT artistPic FROM artists WHERE id='$this->id'");
+            $pic = mysqli_fetch_array($picQuery);
+            return $pic['artistPic'];
+        }
     }
 ?>

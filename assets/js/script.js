@@ -233,3 +233,88 @@ function updatePassword(oldPasswordClass, newPasswordClass1, newPasswordClass2) 
         $("." + oldPasswordClass).nextAll(".message").text(response);
     });
 }
+
+function deleteUser(userId, term) {
+    $.post("includes/handlers/ajax/deleteUser.php", {userId: userId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = "";
+        }
+        openPage("adminUsers.php?term=" + term);
+    });
+}
+
+function updateUsers(idUserID, usernameID, firstNameID, lastNameID, emailID, passwordID, adminSelectID) {
+    var term;
+    var userId = $("#" + idUserID).val();
+    var username = $("#" + usernameID).val();
+    var firstName = $("#" + firstNameID).val();
+    var lastName = $("#" + lastNameID).val();
+    var email = $("#" + emailID).val();
+    var password = $("#" + passwordID).val();
+    var adminSelect = $("#" + adminSelectID).val();
+
+    if(userId == "" || username == "" || firstName == "" || lastName == "" || email == "" || password == "") {
+        alert("Please fill all the fields!");
+        return;
+    }
+
+    $.post("includes/handlers/ajax/editUser.php", {userId: userId, username: username, firstName: firstName, lastName: lastName, email: email, password: password, adminSelect: adminSelect}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = username;
+            console.log(term);
+        }
+        openPage("adminUsers.php?term=" + term);
+        alert("User added/Updated!");
+    });
+}
+
+function updateArtists(idArtistID, nameID, artist) {
+    var term;
+    var artistId = $("#" + idArtistID).val();
+    var name = $("#" + nameID).val();
+    var picture = $("#" + artist).val();
+
+    if(artistId == "" || name == "") {
+        alert("Please fill all the fields!");
+        return;
+    }
+
+    console.log(picture);
+
+    /* $.post("includes/handlers/ajax/editArtists.php", {artistId: artistId, name: name}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = username;
+            console.log(term);
+        }
+        openPage("adminUsers.php?term=" + term);
+        alert("User added/Updated!");
+    }); */
+    $('#submit').click(function() {
+        $.ajax({
+            url: 'send_email.php',
+            type: 'POST',
+            data: {
+                email: 'email@example.com',
+                message: 'hello world!'
+            },
+            success: function(msg) {
+                alert('Email Sent');
+            }               
+        });
+    });
+}

@@ -10,7 +10,7 @@
     $artist = new Artist($con, $artistId);
 ?>
 
-<div class="entityInfo borderBottom">
+<div class="entityInfo borderBottom artistHeader" style="background: linear-gradient(transparent, rgb(6, 3, 50)), url('assets/<?php echo $artist->getArtistPic(); ?>') no-repeat center; background-size: cover;">
 
     <div class="centerSection">
         <div class="artistInfo">

@@ -27,6 +27,9 @@
                 <span role="link" tabindex="0" onclick="openPage('adminDashboard.php')" class="navItemLink">Dashboard</span>
             </div>
             <div class="navItem admin">
+                <span role="link" tabindex="0" onclick="openPage('adminUsers.php')" class="navItemLink">Users</span>
+            </div>
+            <div class="navItem admin">
                 <span role="link" tabindex="0" onclick="openPage('adminArtists.php')" class="navItemLink">Artists</span>
             </div>
             <div class="navItem admin">

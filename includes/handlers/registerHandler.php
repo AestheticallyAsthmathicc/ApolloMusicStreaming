@@ -18,8 +18,6 @@
 		return $inputText;
 	}
 
-
-
 	if (isset($_POST['registerButton'])) {
 		$username = sanitizeFormUsername($_POST['username']);
 

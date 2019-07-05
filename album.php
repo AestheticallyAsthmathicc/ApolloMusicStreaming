@@ -81,6 +81,4 @@ $artistId = $artist->getId();
 <nav class="optionsMenu">
     <input type="hidden" class="songId">
     <?PHP echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
-    <div class="item">Option 2</div>
-    <div class="item">Option 3</div>
 </nav>
