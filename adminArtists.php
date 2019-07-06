@@ -12,7 +12,7 @@
 
 <div class="searchContainer">
 
-    <h4>Search for a user via artist name</h4>
+    <h4>Search for an artist via artist name</h4>
     <input type="text" class="searchInput" value="<?PHP echo $term; ?>" placeholder="Enter here..."
         onfocus="this.selectionStart = this.selectionEnd = this.value.length;">
     <!-- onfocus="this.selectionStart = this.selectionEnd = this.value.length;" is a workaround to make the focus move to the end of the input field -->

@@ -38,6 +38,9 @@
             <div class="navItem admin">
                 <span role="link" tabindex="0" onclick="openPage('adminSongs.php')" class="navItemLink">Songs</span>
             </div>
+            <div class="navItem admin">
+                <span role="link" tabindex="0" onclick="openPage('adminGenres.php')" class="navItemLink">Genres</span>
+            </div>
         </div>
     </nav>
 </div>

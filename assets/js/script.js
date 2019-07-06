@@ -278,43 +278,41 @@ function updateUsers(idUserID, usernameID, firstNameID, lastNameID, emailID, pas
     });
 }
 
-function updateArtists(idArtistID, nameID, artist) {
+function updateGenre(idGenreID, nameID) {
     var term;
-    var artistId = $("#" + idArtistID).val();
+    var genreId = $("#" + idGenreID).val();
     var name = $("#" + nameID).val();
-    var picture = $("#" + artist).val();
 
-    if(artistId == "" || name == "") {
+    if(genreId == "" || name == "") {
         alert("Please fill all the fields!");
         return;
     }
 
-    console.log(picture);
-
-    /* $.post("includes/handlers/ajax/editArtists.php", {artistId: artistId, name: name}).done(function(error) {
+    $.post("includes/handlers/ajax/editGenre.php", {genreId: genreId, name: name}).done(function(error) {
         //do something when ajax returns
         if(error != "") {
             alert(error);
             return;
         }
         if(term == undefined) {
-            term = username;
+            term = name;
             console.log(term);
         }
-        openPage("adminUsers.php?term=" + term);
-        alert("User added/Updated!");
-    }); */
-    $('#submit').click(function() {
-        $.ajax({
-            url: 'send_email.php',
-            type: 'POST',
-            data: {
-                email: 'email@example.com',
-                message: 'hello world!'
-            },
-            success: function(msg) {
-                alert('Email Sent');
-            }               
-        });
+        openPage("adminGenres.php?term=" + term);
+        alert("Genre Added/Updated!");
+    });
+}
+
+function deleteGenre(genreId, term) {
+    $.post("includes/handlers/ajax/deleteGenre.php", {genreId: genreId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = "";
+        }
+        openPage("adminGenres.php?term=" + term);
     });
 }

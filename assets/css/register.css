@@ -141,7 +141,7 @@ hr {
 }
 
 #inputContainer .errorMessage {
-    color: white;
+    color: red;
     font-size: 12px;
     display: block;
     font-weight: 850;

@@ -12,7 +12,7 @@
    <form id="form" method="POST" enctype="multipart/form-data">
       <p>
          <label for="idArtist">ID</label>
-         <input id="idArtist" name="idArtist" type="text" placeholder="e.g. 1" required>
+         <input id="idArtist" name="idArtist" type="text" placeholder="e.g. 123" required>
       </p>
       <label for="name">Name</label>
       <input id="name" name="name" type="text" placeholder="e.g. Tame Impala" required>
@@ -22,7 +22,7 @@
          <input type="file" value="Upload Image" name="image" id="image">
       </p>
       <p>
-         <input type="submit" value="Upload Image" name="submit">
+         <input type="submit" value="ADD/UPDATE Artist" name="submit">
       </p>
    </form>
    <hr>
@@ -33,6 +33,11 @@
 
       $id = $_POST['idArtist'];
       $name = $_POST['name'];
+
+      if(!is_numeric($id)) {
+         echo "<p class='errorsAdmin'>Please entered a valid ID!</p>";
+         exit();
+      }
 
       $path = $_FILES['image']['name'];
       $file_size = $_FILES['image']['size'];
@@ -53,7 +58,6 @@
 
       if (!file_exists($folderCreaton)) {
          mkdir($folderCreaton, 0777, true);
-         echo "folder created!";
       }
 
       $fullDirectory = "music/" . $folder_name . "/" . $file_name;
@@ -78,13 +82,11 @@
             $addArtist = mysqli_query($con, "INSERT INTO artists (`id`, `name`, `artistPic`) VALUES ('$id', '$name', '$fullDirectory')");
             echo "<p class='errorsAdmin'>Succesfully ddded!</p>";
          } else if (mysqli_num_rows($idQuery) == 1) {
-            $addArtist = mysqli_query($con, "UPDATE artists SET id = '$id', name = '$name', artistPic = '$fullDirectory'");
+            $addArtist = mysqli_query($con, "UPDATE artists SET name = '$name', artistPic = '$fullDirectory' WHERE  id = '$id'");
             echo "<p class='errorsAdmin'>Succesfully updated!</p>";
          } else {
             echo "<p class='errorsAdmin'>Duplicate IDs!</p>";
          }
-
-         echo "<script> openPage('adminArtists.php?term=' . term); </script>";
       } else {
          echo "<p class='errorsAdmin'>Unknown error occured!</p>";
       }
