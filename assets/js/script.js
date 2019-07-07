@@ -9,18 +9,6 @@ var shuffle = false;
 var userLoggedIn;
 var timer;
 
-$(document).click(function(click) {
-    var target = $(click.target);
-
-    if(!target.hasClass("item") && !target.hasClass("optionsButton")) {
-        hideOptionsMenu();
-    };
-});
-
-$(window).scroll(function() {
-    hideOptionsMenu();
-});
-
 $(document).on("change", "select.playlist", function() {
     var select = $(this);
     //this will contain the value of the playlsit
@@ -316,3 +304,57 @@ function deleteGenre(genreId, term) {
         openPage("adminGenres.php?term=" + term);
     });
 }
+
+function deleteSong(songId, term) {
+    $.post("includes/handlers/ajax/deleteSong.php", {songId: songId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = "";
+        }
+        openPage("adminSongs.php?term=" + term);
+    });
+}
+
+function deleteAlbum(albumId, term) {
+    $.post("includes/handlers/ajax/deleteAlbum.php", {albumId: albumId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = "";
+        }
+        openPage("adminAlbums.php?term=" + term);
+    });
+}
+
+function deleteArtist(artistId, term) {
+    $.post("includes/handlers/ajax/deleteArtist.php", {artistId: artistId}).done(function(error) {
+        //do something when ajax returns
+        if(error != "") {
+            alert(error);
+            return;
+        }
+        if(term == undefined) {
+            term = "";
+        }
+        openPage("adminArtists.php?term=" + term);
+    });
+}
+
+$(document).click(function(click) {
+    var target = $(click.target);
+
+    if(!target.hasClass("item") && !target.hasClass("optionsButton")) {
+        hideOptionsMenu();
+    };
+});
+
+$(window).scroll(function() {
+    hideOptionsMenu();
+});

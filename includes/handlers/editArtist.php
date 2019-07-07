@@ -1,9 +1,13 @@
 <?PHP
    include("../config.php");
+
+   $numArtists = mysqli_query($con, "SELECT id FROM artists");
+   $artistsNumbers = mysqli_num_rows($numArtists) + 1;
 ?>
 
 <head>
    <link rel="stylesheet" href="../../assets/css/style.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="../../assets/js/script.js"></script>
 </head>
 
@@ -12,7 +16,7 @@
    <form id="form" method="POST" enctype="multipart/form-data">
       <p>
          <label for="idArtist">ID</label>
-         <input id="idArtist" name="idArtist" type="text" placeholder="e.g. 123" required>
+         <input id="idArtist" name="idArtist" type="text" placeholder="e.g. 123" value="<?PHP echo $artistsNumbers; ?>" required>
       </p>
       <label for="name">Name</label>
       <input id="name" name="name" type="text" placeholder="e.g. Tame Impala" required>
@@ -68,7 +72,7 @@
       }
       
       if($file_size > 20971520) {
-         echo "<p class='errorsAdmin'>File size must be excately 20 MB!</p>";
+         echo "<p class='errorsAdmin'>File size must be 20 MB or smaller!</p>";
          exit();
       }
 

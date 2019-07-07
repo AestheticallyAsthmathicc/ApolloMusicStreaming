@@ -6,6 +6,9 @@
     } else {
         $term = "";
     }
+
+    $numGenres = mysqli_query($con, "SELECT id FROM genres");
+    $genreNumbers = mysqli_num_rows($numGenres) + 1;
 ?>
 
 <h1 class="pageHeadingBig">Genres Dashboard</h1>
@@ -59,7 +62,7 @@
     <h2>Add/Update User</h2>
         <p>
 	    	<label for="idGenre">ID</label>
-	    	<input id="idGenre" name="idGenre" type="text" placeholder="e.g. 123" required>
+	    	<input id="idGenre" name="idGenre" type="text" placeholder="e.g. 123" value="<?PHP echo $genreNumbers; ?>" required>
 	    </p>
         <p>
 	    	<label for="name">Name</label>

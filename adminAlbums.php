@@ -58,7 +58,7 @@
                     <td class='tableRows'> " . $rowArtists['name'] . "</td>
                     <td class='tableRows'> " . $rowGenre['name'] . "</td>
                     <td class='tableRows'> " . $row['artworkPath'] . "</td>
-                    <td class='tableRows'><button onclick='deleteArtist(" . $albumId . ", val)' class='button button-admin'>Delete</button></td>
+                    <td class='tableRows'><button onclick='deleteAlbum(" . $albumId . ", val)' class='button button-admin'>Delete</button></td>
                   </tr>
             ";
         }
@@ -69,7 +69,7 @@
         //ARTSIT SEARCH RESULT
 
         $artistsQuery = mysqli_query($con, "SELECT * FROM artists WHERE lower(name) LIKE lower('$term%')");
-
+        
         echo "
             <h1 class='pageHeadingBig'>Search via Artist name<h1>
             <div class='tableContainer'>
@@ -81,28 +81,30 @@
                     <th class='tableHeading'>Genre</th>
                     <th class='tableHeading'>Artwork Path</th>
                     <th class='tableHeading'>Delete</th>
+                </tr>
         ";
 
         if(mysqli_num_rows($artistsQuery) == 0) {
             echo "<span class='noResults showError'> No artists found matching " . $term . "</span>";
         }
 
-        while($row = mysqli_fetch_array($artistsQuery)) {
-            $artistId = $row['id'];
-            $albumQueryForArtists = mysqli_query($con, "SELECT * FROM albums WHERE artist = '$artistId'");
-            $rowAlbums = mysqli_fetch_array($albumQueryForArtists);
+        $row = mysqli_fetch_array($artistsQuery);
+        $artistId = $row['id'];
+        $albumQueryForArtists = mysqli_query($con, "SELECT * FROM albums WHERE artist = '$artistId'");
+
+        while($rowAlbums = mysqli_fetch_array($albumQueryForArtists)) {
+            if($term == "") break;
             $genreId = $rowAlbums['genre'];
             $genreQueryForAlbums = mysqli_query($con, "SELECT name FROM genres WHERE id = '$genreId'");
             $rowGenre = mysqli_fetch_array($genreQueryForAlbums);
             $albumId = $rowAlbums['id'];
-            echo "</tr>
-                    <tr>
+            echo "<tr>
                     <td class='tableRows'> " . $albumId . "</td>
                     <td class='tableRows'> " . $rowAlbums['title'] . "</td>
                     <td class='tableRows'> " . $row['name'] . "</td>
                     <td class='tableRows'> " . $rowGenre['name'] . "</td>
                     <td class='tableRows'> " . $rowAlbums['artworkPath'] . "</td>
-                    <td class='tableRows'><button onclick='deleteArtist(" . $albumId . ", val)' class='button button-admin'>Delete</button></td>
+                    <td class='tableRows'><button onclick='deleteAlbum(" . $albumId . ", val)' class='button button-admin'>Delete</button></td>
                   </tr>
             ";
         }
